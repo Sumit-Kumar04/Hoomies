@@ -1,0 +1,158 @@
+<%layout("/layouts/boilerplate")%>
+<style>
+ .filter-container-wrapper {
+    position: relative;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    width:95%;
+    
+}
+
+.filter-container {
+    margin-top:1rem;
+       display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 15px;
+    padding: 10px 15px;
+    width:72%;
+   
+}
+
+.filter-container::-webkit-scrollbar {
+    display: none; /* hide scrollbar */
+}
+
+.filter {
+    flex: 0 0 auto;
+    background: #fff;
+   
+    padding: 4px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    min-width: 60px;
+   
+    font-size: 10px;
+}
+
+.filter div {
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+.tax-toggle {
+    padding-left: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    padding: 8px 14px;
+    border-radius: 25px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    font-size: 18px;
+    white-space: nowrap;
+}
+
+.tax-toggle input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.tax-toggle label {
+    cursor: pointer;
+    user-select: none;
+}
+.tax-info{
+    display: none;
+}
+.tax-icon {
+    display: none;
+    font-size: 18px;
+}
+@media (max-width: 1013px) {
+    
+    .filter-container{
+        width:98%;
+    }
+     .tax-text {
+        display: none;
+    }
+    .tax-icon {
+        display: inline-block;
+    }
+}
+    
+</style>
+
+
+<body>
+  
+        <div class="filter-container-wrapper">
+    
+    
+    <div class="filter-container">
+        <div class="filter"><div><i class="fa-solid fa-fire"></i></div>Trending</div>
+        <div class="filter"><div><i class="fa-solid fa-bed"></i></div>Room</div>
+        <div class="filter"><div><i class="fa-solid fa-water"></i></div>Beachfront</div>
+        <div class="filter"><div><i class="fa-solid fa-tree"></i></div>Countryside</div>
+        <div class="filter"><div><i class="fa-solid fa-mountain"></i></div>Mountain View</div>
+        <div class="filter"><div><i class="fa-solid fa-city"></i></div>City Stay</div>
+        <div class="filter"><div><i class="fa-solid fa-snowflake"></i></div>Winter Escapes</div>
+        <div class="filter"><div><i class="fa-solid fa-dog"></i></div>Pet Friendly</div>
+        <div class="filter"><div><i class="fa-solid fa-campground"></i></div>Camping</div>
+        <div class="filter"><div><i class="fa-solid fa-hot-tub-person"></i></div>Luxury Stay</div>
+        <div class="filter"><div><i class="fa-solid fa-utensils"></i></div>Food & Drink</div>
+        <div class="filter"><div><i class="fa-solid fa-person-hiking"></i></div>Adventure</div>
+    </div>
+    <div class="tax-toggle">
+    <div class="form-check-reverse form-switch auto">
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+        <!-- <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label> -->
+        <span class="tax-text">Display total after taxes</span>
+            <i class="fa-solid fa-receipt tax-icon"></i>
+    </div>
+</div>
+    
+</div>
+
+
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+        <%for(let listing of allListings){%>
+            <a href="/listings/<%=listing._id%>" class="card-link " >
+            
+                 <div class="card listing-card" >
+                 <img src="<%=listing.image.url%>" class="card-img-top" style="height:20rem" alt="...">
+                
+                 
+
+                 <div class="card-img-overlay"></div>
+                <div class="card-body">
+                <p class="card-text"><b><%=listing.title%></b></p>
+                 <p class="card-text">&#8377;<%=listing.price.toLocaleString("en-IN")%>/night
+                <i class="tax-info">&nbsp;&nbsp; +18% GST</i></p>
+                </div>
+           
+       
+            </div>
+            </a>
+       
+    <%}%>
+    </div>
+   <script>
+    let taxSwitch=document.getElementById("flexSwitchCheckDefault");
+    taxSwitch.addEventListener('click',()=>{
+        let taxInfo=document.getElementsByClassName('tax-info');
+        for(info of taxInfo){
+            if(info.style.display!="inline"){
+                info.style.display="inline";
+            }
+            else{
+                info.style.display='none';
+            }
+        }
+    })
+    
+   </script>
+    
+</body>
