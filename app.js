@@ -21,12 +21,14 @@ const flash=require("connect-flash")
 const passport=require('passport');
 const LocalStrategy=require('passport-local');
 const User=require('./models/user.js');
-let mongoURL='mongodb://127.0.0.1:27017/hoomies';
-// let dbUrl=process.env.ATLASDB_URL;
+// let mongoURL='mongodb://127.0.0.1:27017/hoomies';
+let dbUrl=process.env.ATLASDB_URL;
 
 
 async function main(){
-    mongoose.connect(mongoURL)
+    mongoose.connect(dbUrl + "&tls=true", {
+  ssl: true
+})
 };
 main().then(()=>{
     console.log("Connection successful")
@@ -52,19 +54,19 @@ app.use(express.static(path.join(__dirname,"public")));
 // app.get("/",(req,res)=>{
 //     res.send("I am root");
 // });
-// const store=MongoStore.create({
-//     mongoUrl:dbUrl,
-//     crypto:{
-//         secret:process.env.SECRET
-//     },
-//     touchAfter:24*3600,
-// });
-// store.on("error",()=>{
-//     console.log("ERROR in MONGO SESSION STORE",err);
-// });
+const store=MongoStore.create({
+    mongoUrl:dbUrl,
+    crypto:{
+        secret:process.env.SECRET
+    },
+    touchAfter:24*3600,
+});
+store.on("error",()=>{
+    console.log("ERROR in MONGO SESSION STORE",err);
+});
 
 const sessionOptions={
-    // store,
+    store,
     secret:process.env.SECRET,
     resave:false,
      saveUninitialized:true,
