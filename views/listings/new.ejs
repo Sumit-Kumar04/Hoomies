@@ -26,6 +26,25 @@
     <label for="image" class="form-label">Upload Listing Image</label>
     <input type="file" name="listing[image]" class="form-control" required>
   </div>
+  <div class="mb-3">
+  <label for="category" class="form-label">Category</label>
+  <select name="listing[category]" class="form-control" required>
+    <option value="" disabled selected>Select category</option>
+    <option>Trending</option>
+    <option>Room</option>
+    <option>Beachfront</option>
+    <option>Countryside</option>
+    <option>Mountain View</option>
+    <option>City Stay</option>
+    <option>Winter Escapes</option>
+    <option>Pet Friendly</option>
+    <option>Camping</option>
+    <option>Luxury Stay</option>
+    <option>Food & Drink</option>
+    <option>Adventure</option>
+  </select>
+  <div class="invalid-feedback">Please select a category</div>
+</div>
   <div class="row">
   <div class="mb-3 col-md-4">
     <label for="price" class="form-label">Price (₹)</label>

@@ -38,6 +38,16 @@ const listingSchema=new Schema({
       required: true
     }
     },
+     category: {
+    type: String,
+    enum: [
+      "Trending", "Room", "Beachfront", "Countryside",
+      "Mountain View", "City Stay", "Winter Escapes",
+      "Pet Friendly", "Camping", "Luxury Stay",
+      "Food & Drink", "Adventure"
+    ],
+    required: true
+  },
      
     
     

@@ -17,7 +17,12 @@
     gap: 15px;
     padding: 10px 15px;
     width:72%;
+    
    
+}
+.filter-container a{
+    text-decoration: none;
+    color:black;
 }
 
 .filter-container::-webkit-scrollbar {
@@ -91,20 +96,45 @@
         <div class="filter-container-wrapper">
     
     
-    <div class="filter-container">
-        <div class="filter"><div><i class="fa-solid fa-fire"></i></div>Trending</div>
-        <div class="filter"><div><i class="fa-solid fa-bed"></i></div>Room</div>
-        <div class="filter"><div><i class="fa-solid fa-water"></i></div>Beachfront</div>
-        <div class="filter"><div><i class="fa-solid fa-tree"></i></div>Countryside</div>
-        <div class="filter"><div><i class="fa-solid fa-mountain"></i></div>Mountain View</div>
-        <div class="filter"><div><i class="fa-solid fa-city"></i></div>City Stay</div>
-        <div class="filter"><div><i class="fa-solid fa-snowflake"></i></div>Winter Escapes</div>
-        <div class="filter"><div><i class="fa-solid fa-dog"></i></div>Pet Friendly</div>
-        <div class="filter"><div><i class="fa-solid fa-campground"></i></div>Camping</div>
-        <div class="filter"><div><i class="fa-solid fa-hot-tub-person"></i></div>Luxury Stay</div>
-        <div class="filter"><div><i class="fa-solid fa-utensils"></i></div>Food & Drink</div>
-        <div class="filter"><div><i class="fa-solid fa-person-hiking"></i></div>Adventure</div>
-    </div>
+  <div class="filter-container">
+  <a class="filter" href="/listings?category=Trending">
+    <div><i class="fa-solid fa-fire"></i></div>Trending
+  </a>
+  <a class="filter" href="/listings?category=Room">
+    <div><i class="fa-solid fa-bed"></i></div>Room
+  </a>
+  <a class="filter" href="/listings?category=Beachfront">
+    <div><i class="fa-solid fa-water"></i></div>Beachfront
+  </a>
+  <a class="filter" href="/listings?category=Countryside">
+    <div><i class="fa-solid fa-tree"></i></div>Countryside
+  </a>
+  <a class="filter" href="/listings?category=Mountain View">
+    <div><i class="fa-solid fa-mountain"></i></div>Mountain View
+  </a>
+  <a class="filter" href="/listings?category=City Stay">
+    <div><i class="fa-solid fa-city"></i></div>City Stay
+  </a>
+  <a class="filter" href="/listings?category=Winter Escapes">
+    <div><i class="fa-solid fa-snowflake"></i></div>Winter Escapes
+  </a>
+  <a class="filter" href="/listings?category=Pet Friendly">
+    <div><i class="fa-solid fa-dog"></i></div>Pet Friendly
+  </a>
+  <a class="filter" href="/listings?category=Camping">
+    <div><i class="fa-solid fa-campground"></i></div>Camping
+  </a>
+  <a class="filter" href="/listings?category=Luxury Stay">
+    <div><i class="fa-solid fa-hot-tub-person"></i></div>Luxury Stay
+  </a>
+  <a class="filter" href="/listings?category=Food & Drink">
+    <div><i class="fa-solid fa-utensils"></i></div>Food & Drink
+  </a>
+  <a class="filter" href="/listings?category=Adventure">
+    <div><i class="fa-solid fa-person-hiking"></i></div>Adventure
+  </a>
+</div>
+
     <div class="tax-toggle">
     <div class="form-check-reverse form-switch auto">
         <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
