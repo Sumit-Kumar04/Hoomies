@@ -34,13 +34,12 @@ module.exports.showListing=async(req,res)=>{
     {path:'reviews',
         populate:({path:'author'})}
     ).populate("owner");
-   if(!listing){
-     req.flash("error","Listing you requested does not exist!");
-     res.redirect("/listings");
-   }
-   else{
-    res.render("listings/show.ejs",{listing});
-   }
+   if (!listing) {
+    req.flash("error", "Listing you requested does not exist!");
+    return res.redirect("/listings");
+}
+
+res.render("listings/show.ejs", { listing });
    console.log(listing);
 }
 module.exports.createListing=async(req,res,next)=>{
