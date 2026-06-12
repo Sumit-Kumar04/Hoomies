@@ -108,11 +108,13 @@
         </div>
 
 <%}%>
-    <div class="col-8 offset-2" >
-                <hr>
-                <h4>You will be there</h4>
-                <div class="mb-3 mr-3" id="map"></div>
-            </div> 
- </div>
-</body>
+   <% if (listing.geometry && listing.geometry.coordinates) { %>
+<div class="col-8 offset-2">
+    <hr>
+    <h4>You will be there</h4>
+    <div class="mb-3 mr-3" id="map"></div>
+</div>
+
+
 <script src="/js/map.js"></script>
+<% } %>
