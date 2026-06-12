@@ -1,7 +1,6 @@
-if(process.env.NODE_ENV !="production"){
-require('dotenv').config();
-
-};
+if(process.env.NODE_ENV != "production"){
+    require("dotenv").config();
+}
 
 
 const express=require("express");
@@ -23,19 +22,25 @@ const LocalStrategy=require('passport-local');
 const User=require('./models/user.js');
 // let mongoURL='mongodb://127.0.0.1:27017/hoomies';
 let dbUrl=process.env.ATLASDB_URL;
+const port=process.env.PORT || 8080;
+
+const requiredEnv = [
+    "ATLASDB_URL",
+    "SECRET",
+    "MAP_TOKEN",
+    "CLOUD_NAME",
+    "CLOUD_API_KEY",
+    "CLOUD_API_SECRET",
+];
+const missingEnv = requiredEnv.filter((key) => !process.env[key]);
+if (missingEnv.length) {
+    throw new Error(`Missing required environment variables: ${missingEnv.join(", ")}`);
+}
 
 
 async function main(){
-    mongoose.connect(dbUrl + "&tls=true", {
-  ssl: true
-})
+    await mongoose.connect(dbUrl)
 };
-main().then(()=>{
-    console.log("Connection successful")
-})
-.catch(err=>{
-    console.log(err);
-});
 
 const listingRouter=require("./routes/listing.js")
 const reviewRouter=require("./routes/review.js")
@@ -51,9 +56,9 @@ app.use(express.static(path.join(__dirname,"public")));
 
 
 
-// app.get("/",(req,res)=>{
-//     res.send("I am root");
-// });
+app.get("/",(req,res)=>{
+    res.redirect("/listings");
+});
 const store=MongoStore.create({
     mongoUrl:dbUrl,
     crypto:{
@@ -61,7 +66,7 @@ const store=MongoStore.create({
     },
     touchAfter:24*3600,
 });
-store.on("error",()=>{
+store.on("error",(err)=>{
     console.log("ERROR in MONGO SESSION STORE",err);
 });
 
@@ -151,6 +156,9 @@ app.use((req, res, next) => {
     res.status(404).render("error.ejs",{message});
 });
 app.use((err, req, res, next) => {
+    if (res.headersSent) {
+        return next(err);
+    }
    
     const statusCode = err.statusCode || 500;
     const message = err.message || "Something went wrong";
@@ -165,6 +173,12 @@ app.use((err, req, res, next) => {
 
 
 
-app.listen(8080,()=>{
-    console.log("app is listening at : ",8080);
+main().then(()=>{
+    console.log("Connection successful")
+    app.listen(port,()=>{
+        console.log("app is listening at : ",port);
+    })
 })
+.catch(err=>{
+    console.log("Mongo connection error:", err);
+});
